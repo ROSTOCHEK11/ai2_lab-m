@@ -1,0 +1,10 @@
+PUT http://localhost:52869/todos/2
+Content-Type: application/json
+
+{
+  "id": "2",
+  "title": "Hello Again World",
+  "deadline": "2000-01-01",
+  "completed": false,
+  "archived": true
+}
