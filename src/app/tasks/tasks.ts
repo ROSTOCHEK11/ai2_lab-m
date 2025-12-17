@@ -3,11 +3,27 @@ import {Task} from '../task';
 import {Tasks as TasksService} from '../tasks';
 import {FormsModule} from '@angular/forms';
 import {forkJoin, Observable} from 'rxjs';
+import {MatButton} from '@angular/material/button';
+import {MatCheckbox} from '@angular/material/checkbox';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInput} from '@angular/material/input';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {provideNativeDateAdapter} from '@angular/material/core';
+import {MatCardModule} from '@angular/material/card';
+import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'app-tasks',
+  providers: [provideNativeDateAdapter()],
   imports: [
-    FormsModule
+    FormsModule,
+    MatButton,
+    MatCheckbox,
+    MatFormFieldModule,
+    MatInput,
+    MatDatepickerModule,
+    MatCardModule,
+    DatePipe,
   ],
   templateUrl: './tasks.html',
   styleUrl: './tasks.css',
@@ -70,5 +86,22 @@ export class Tasks implements OnInit {
     forkJoin(observables).subscribe(() => {
       this.ngOnInit();
     });
+  }
+
+  canArchiveCompleted() {
+    for (const task of this.tasks) {
+      if (task.completed) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  canAddTask() {
+    if (this.isProcessing) {
+      return false;
+    }
+
+    return !!this.newTask.title;
   }
 }

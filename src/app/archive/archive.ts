@@ -1,10 +1,23 @@
 import { Component } from '@angular/core';
 import {Task} from '../task';
 import {Tasks as TasksService} from '../tasks';
+import {MatIcon} from '@angular/material/icon';
+import {MatCard, MatCardActions, MatCardHeader, MatCardSubtitle, MatCardTitle} from '@angular/material/card';
+import {DatePipe} from '@angular/common';
+import {MatIconButton} from '@angular/material/button';
 
 @Component({
   selector: 'app-archive',
-  imports: [],
+  imports: [
+    MatIcon,
+    MatCardHeader,
+    MatCardSubtitle,
+    DatePipe,
+    MatCardActions,
+    MatCard,
+    MatCardTitle,
+    MatIconButton
+  ],
   templateUrl: './archive.html',
   styleUrl: './archive.css',
 })
